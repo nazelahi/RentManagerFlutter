@@ -1,0 +1,81 @@
+name: rentmanager
+description: "RentManager - Property Management Made Simple (Flutter port of Expo app)"
+publish_to: 'none'
+version: 1.0.6+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^2.0.0
+
+  # State management (Riverpod, chosen by user)
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+
+  # Local persistence (AsyncStorage port)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.3
+
+  # Utils
+  intl: ^0.20.3
+  uuid: ^4.5.1
+
+  # Code gen
+
+  # Network / backend parity
+  http: ^1.2.2
+  connectivity_plus: ^7.3.2
+
+  # Google Drive backup parity
+  google_sign_in: ^7.2.0
+  googleapis: ^17.0.0
+  googleapis_auth: ^2.3.4
+
+  # Local notifications parity (expo-notifications)
+  flutter_local_notifications: ^22.3.2
+  timezone: ^0.11.2
+  permission_handler: ^13.0.2
+
+  # Biometric parity (expo-local-authentication)
+  local_auth: ^3.0.2
+
+  # Media / files parity (image-picker, document-picker, compression)
+  image_picker: ^1.1.2
+  file_picker: ^13.1.0
+  path_provider: ^2.1.4
+  share_plus: ^13.3.1
+  printing: ^5.13.1
+  pdf: ^3.10.8
+  open_filex: ^4.3.4
+
+  # Deep links parity (rentmanager://)
+  app_links: ^7.2.2
+
+  # Icons parity (Ionicons -> Material + ionicons pkg)
+  ionicons: ^0.2.2
+
+  # Call / email actions (TenantsScreen Linking parity)
+  url_launcher: ^6.3.1
+  archive: ^4.5.2
+  desktop_drop: ^0.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.4.0
+  hive_generator: ^2.0.1
+  mocktail: ^1.0.4
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
