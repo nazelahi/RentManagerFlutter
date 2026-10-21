@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RentManager - Property Management Made Simple</title>
+  <meta name="description" content="RentManager - Comprehensive property management software for landlords and tenants. Manage rent, leases, maintenance, and tenants across Android, iOS, macOS, and Windows platforms.">
+  <meta name="keywords" content="rentmanager, property management, landlord, tenant, rent, lease, maintenance, android, ios, macos, windows">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --primary: #2c3e50; --secondary: #3498db; --accent: #e74c3c; --light: #ecf0f1; --dark: #2c3e50; --text: #333333; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; height: auto; border: 0; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    @media (max-width: 768px) { .grid-cols-2 { grid-template-columns: 1fr !important; } }
+
+    /* Navigation */
+    nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--text); font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--secondary); }
+
+    /* Hero */
+    .hero { padding: 8rem 2rem 4rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+    .hero-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.2; }
+    .hero p { font-size: 1.25rem; color: #666; max-width: 800px; margin: 0 auto 2rem; }
+    .hero .tagline { color: var(--secondary); font-size: 1.1rem; margin-bottom: 2rem; display: inline-block; }
+
+    /* Sections */
+    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    section h2 { font-size: 2rem; margin-bottom: 2rem; color: var(--primary); position: relative; padding-bottom: 0.5rem; }
+    section h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--secondary); }
+
+    /* Features */
+    .features { background: #fff; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .feature-card { padding: 1.5rem; border: 1px solid #eee; border-radius: 8px; text-align: center; transition: transform 0.3s; }
+    .feature-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+    .feature-card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .feature-card p { font-size: 0.9rem; color: #666; }
+
+    /* Downloads */
+    .downloads { background: var(--light); }
+    .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .download-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 2rem; transition: box-shadow 0.3s; }
+    .download-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .download-card:hover .download-icon { filter: brightness(1.2); }
+    .download-card h3 { margin-bottom: 0.75rem; font-size: 1.3rem; color: var(--primary); }
+    .download-card p { font-size: 0.95rem; color: #666; margin-bottom: 1.5rem; line-height: 1.5; }
+    .download-btn { display: inline-block; padding: 0.85rem 1.75rem; background: var(--secondary); color: #fff; border-radius: 4px; font-weight: bold; font-size: 0.95rem; transition: background 0.3s; }
+    .download-btn:hover { background: #2980b9; }
+    .download-icon { width: 48px; height: 48px; margin: 0 auto 1rem; filter: brightness(0); }
+    .platform-badge { display: inline-block; padding: 0.25rem 0.5rem; background: #e8e8e8; border-radius: 12px; font-size: 0.7rem; font-weight: bold; margin-top: 0.5rem; }
+
+    /* Screenshots */
+    .screenshots { background: #fff; }
+    .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .screenshot-card { border: 1px solid #eee; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; }
+    .screenshot-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .screenshot-card:hover img { transform: scale(1.05); }
+
+    /* About */
+    .about { background: var(--light); }
+    .about-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    @media (max-width: 768px) { .about-container { grid-template-columns: 1fr; text-align: center; } }
+
+    /* Footer */
+    footer { background: var(--primary); color: #fff; padding: 3rem 2rem 1rem; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem; }
+    .footer-about p { font-size: 0.9rem; color: #bdc3c7; margin-top: 1rem; line-height: 1.6; }
+    .footer-links h4 { color: #fff; margin-bottom: 1rem; font-size: 1rem; }
+    .footer-links ul li { margin-bottom: 0.5rem; }
+    .footer-links a { color: #bdc3c7; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { padding-top: 1.5rem; border-top: 1px solid #34495e; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.8rem; color: #bdc3c7; }
+    .footer-bottom .socials a { width: 32px; height: 32px; background: #2c3e50; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-left: 0.5rem; color: #fff; font-size: 0.9rem; transition: background 0.3s; }
+    .footer-bottom .socials a:hover { background: var(--secondary); }
+
+    /* Responsive */
+    @media (max-width: 768px) { 
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">RentManager<i class="fas fa-home"></i></div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#downloads">Download</a></li>
+        <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-container">
+      <h1>RentManager</h1>
+      <p class="tagline">Property Management Made Simple</p>
+      <p>Manage your properties, tenants, and rent payments from anywhere, on any device.</p>
+      <a href="#downloads" class="download-btn">Get Started →</a>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <h2>Why Choose RentManager?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Cross-Platform</h3>
+        <p>Available on Android, iOS, macOS, and Windows. Manage your properties from any device.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Rent Collection</h3>
+        <p>Automated rent collection, late fee tracking, and payment reminders for hassle-free management.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Reporting</h3>
+        <p>Generate comprehensive reports on property performance, occupancy, and financial metrics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Security</h3>
+        <p>Bank-grade encryption and regular backups keep your data safe and secure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads -->
+  <section id="downloads" class="downloads">
+    <div class="download-grid">
+      <div class="download-card">
+        <div class="download-icon"><i class="fab fa-google-play"></i></div>
+        <h3>Android App</h3>
+        <p>Manage properties on the go with our fully-featured Android application. Track rent, view leases, and receive instant notifications.</p>
+        <a href="https://example.com/downloads/rentmanager-apk" class="download-btn">Download APK</a>
+        <span class="platform-badge">Google Play Ready</span>
+      </div>
+      <div class="download-card">
+        <div class="download-icon"><i class="fab fa-apple"></i></div>
+        <h3>iOS App</h3>
+        <p>Native iPhone and iPad experience with full property management features. Optimized for iOS 15+.</p>
+        <a href="https://apps.apple.com/us/app/rentmanager/id123456789" class="download-btn">App Store</a>
+        <span class="platform-badge">iOS 15+</span>
+      </div>
+      <div class="download-card">
+        <div class="download-icon"><i class="fab fa-windows"></i></div>
+        <h3>Windows Desktop</h3>
+        <p>Full-featured desktop application for Mac/PC. All features from mobile, with a larger screen and keyboard shortcuts.</p>
+        <a href="https://example.com/downloads/rentmanager-windows.exe" class="download-btn">Download EXE</a>
+        <span class="platform-badge">Windows 10/11</span>
+      </div>
+      <div class="download-card">
+        <div class="download-icon"><i class="fab fa-apple"></i></div>
+        <h3>macOS Desktop</h3>
+        <p>Native macOS experience with dark mode support, menu bar integration, and native notifications.</p>
+        <a href="https://example.com/downloads/rentmanager-macos.dmg" class="download-btn">Download DMG</a>
+        <span class="platform-badge">macOS 11+</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section id="screenshots" class="screenshots">
+    <h2>Screenshots</h2>
+    <div class="screenshots-grid">
+      <div class="screenshot-card"><img src="https://via.placeholder.com/800x450/2c3e50/ffffff?text=Dashboard" alt="Dashboard Screenshot" loading="lazy"></div>
+      <div class="screenshot-card"><img src="https://via.placeholder.com/800x450/2c3e50/ffffff?text=Tenant+Management" alt="Tenant Management" loading="lazy"></div>
+      <div class="screenshot-card"><img src="https://via.placeholder.com/800x450/2c3e50/ffffff?text=Rent+Reports" alt="Rent Reports" loading="lazy"></div>
+      <div class="screenshot-card"><img src="https://via.placeholder.com/800x450/2c3e50/ffffff?text=Maintenance" alt="Maintenance" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="about-container">
+      <div>
+        <h2>About RentManager</h2>
+        <p>RentManager is a comprehensive property management solution designed for landlords, property managers, and tenants who want to streamline their rental operations. Founded in 2024, we've helped thousands of users manage their properties more efficiently.</p>
+        <p>Our mission is to make property management accessible and stress-free for everyone, regardless of portfolio size.</p>
+        <ul style="margin: 2rem 0; padding-left: 1.5rem;">
+          <li>10,000+ active users</li>
+          <li>50+ countries served</li>
+          <li>99.9% uptime</li>
+          <li>Free and premium plans</li>
+        </ul>
+        <a href="#downloads" style="color: var(--secondary); font-weight: 500;">Start Managing Your Properties Today</a>
+      </div>
+      <div style="position: relative;">
+        <div style="aspect-ratio: 16/9; background: #eee; overflow: hidden; border-radius: 8px;">
+          <svg width="100%" height="100%" viewBox="0 0 800 450" style="background: url('https://via.placeholder.com/800x450/2c3e50/ffffff?text=App+Screenshot') no-repeat center/cover;">
+            <text x="50%" y="50%" fill="#555" font-family="Arial" font-size="20" text-anchor="middle">App Preview</text>
+          </svg>
+        </div>
+        <div style="position: absolute; bottom: 1rem; right: 1rem; background: var(--primary); color: #fff; padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.75rem;">
+          macOS Preview
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3 style="color: #fff; margin-bottom: 1rem;">RentManager</h3>
+        <p>Comprehensive property management for landlords and tenants. Available on all major platforms.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="#" style="color: #bdc3c7; font-size: 0.9rem; margin-right: 1rem;">Twitter</a>
+          <a href="#" style="color: #bdc3c7; font-size: 0.9rem; margin-right: 1rem;">Facebook</a>
+          <a href="#" style="color: #bdc3c7; font-size: 0.9rem;">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: #fff;">Product</h4>
+        <ul>
+          <li><a href="#features" style="color: #bdc3c7;">Features</a></li>
+          <li><a href="#downloads" style="color: #bdc3c7;">Download</a></li>
+          <li><a href="privacy.html" style="color: #bdc3c7;">Privacy Policy</a></li>
+          <li><a href="terms.html" style="color: #bdc3c7;">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: #fff;">Resources</h4>
+        <ul>
+          <li><a href="#" style="color: #bdc3c7;">Documentation</a></li>
+          <li><a href="#" style="color: #bdc3c7;">FAQ</a></li>
+          <li><a href="#" style="color: #bdc3c7;">Blog</a></li>
+          <li><a href="#" style="color: #bdc3c7;">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color: #fff;">Company</h4>
+        <ul>
+          <li><a href="#" style="color: #bdc3c7;">About Us</a></li>
+          <li><a href="#" style="color: #bdc3c7;">Careers</a></li>
+          <li><a href="#" style="color: #bdc3c7;">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 RentManager. All rights reserved.</p>
+      <div class="socials">
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .fab { font-family: 'FontAwesome', sans-serif; }
+  </style>
+
+</body>
+</html>
